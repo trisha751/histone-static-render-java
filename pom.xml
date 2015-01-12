@@ -1,15 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>ru.histone</groupId>
-    <artifactId>histone-static-render</artifactId>
+    <artifactId>histone-static-render-java</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
-    <name>Histone Static Render</name>
-
-    <url>https://github.com/MegafonWebLab/histone-static-render</url>
-
+    <name>Histone Static Renderer (java version)</name>
+    <url>https://github.com/MegafonWebLab/histone-static-render-java</url>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -18,15 +14,12 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
     <developers>
         <developer>
             <name>Peter Salnikov</name>
             <email>peter@salnikov.cc</email>
         </developer>
     </developers>
-
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -39,7 +32,6 @@
 
         <junit.version>4.8.2</junit.version>
     </properties>
-
     <build>
         <plugins>
             <plugin>
@@ -82,6 +74,34 @@
                 <configuration>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <header>src/etc/HEADER.txt</header>
+                    <properties>
+                        <year>${project.inceptionYear}</year>
+                    </properties>
+                    <excludes>
+                        <exclude>**/pom.xml</exclude>
+                        <exclude>**/README</exclude>
+                        <exclude>**/NOTICE.txt</exclude>
+                        <exclude>**/LICENSE.txt</exclude>
+                        <exclude>src/test/resources/**</exclude>
+                        <exclude>src/main/resources/**</exclude>
+                        <exclude>src/assembly/**</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.gmaven</groupId>
@@ -134,9 +154,9 @@
     </dependencies>
 
     <scm>
-        <url>https://github.com/MegafonWebLab/histone-static-render</url>
-        <connection>scm:git:git://github.com/MegafonWebLab/histone-static-render.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/MegafonWebLab/histone-static-render.git</developerConnection>
+        <url>https://github.com/MegafonWebLab/histone-static-render-java</url>
+        <connection>scm:git:git://github.com/MegafonWebLab/histone-static-render-java.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/MegafonWebLab/histone-static-render-java.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
