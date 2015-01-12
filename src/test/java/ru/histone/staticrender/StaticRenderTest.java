@@ -110,7 +110,7 @@ public class StaticRenderTest {
         Files.walkFileTree(expectedDir, filesVisitor1);
         Files.walkFileTree(actualDir, filesVisitor2);
 
-        StringBuilder err = new StringBuilder("\n");
+        StringBuilder err = new StringBuilder();
         if (notFoundInResult.size() > 0) {
             err.append("Files not found in result: " + Joiner.on(", ").join(notFoundInResult)).append("\n");
         }
@@ -122,7 +122,7 @@ public class StaticRenderTest {
         }
 
         if (err.length() > 0) {
-            fail(err.toString());
+            fail("Folders diff fail:\n" + err.toString());
         }
     }
 }
