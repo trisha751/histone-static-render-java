@@ -157,7 +157,7 @@
         <url>https://github.com/MegafonWebLab/histone-static-render-java</url>
         <connection>scm:git:git://github.com/MegafonWebLab/histone-static-render-java.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/MegafonWebLab/histone-static-render-java.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v1.0.0</tag>
     </scm>
 
     <repositories>
