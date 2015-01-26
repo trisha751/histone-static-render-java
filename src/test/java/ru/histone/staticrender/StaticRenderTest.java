@@ -16,6 +16,7 @@
 package ru.histone.staticrender;
 
 import com.google.common.base.Joiner;
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import ru.histone.HistoneException;
@@ -49,6 +50,9 @@ public class StaticRenderTest {
         Path expectedDir = Paths.get(baseDir.toString(), "src/test/resources/testsite_expected");
         Path dstDir = Paths.get(baseDir.toString(), "target", "site");
         if (!dstDir.toFile().exists()) {
+            Files.createDirectory(dstDir);
+        } else {
+            FileUtils.deleteDirectory(dstDir.toFile());
             Files.createDirectory(dstDir);
         }
 

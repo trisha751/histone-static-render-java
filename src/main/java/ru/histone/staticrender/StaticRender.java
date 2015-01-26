@@ -93,8 +93,13 @@ public class StaticRender {
                     }
 
                     final String fileName = file.getFileName().toString();
-                    String layoutId = fileName.substring(0, fileName.length() - 8);
+                    String layoutId = fileName.substring(0, fileName.length() - TEMPLATE_FILE_EXTENSION.length() - 1);
                     layouts.put(layoutId, ast);
+                    if (log.isDebugEnabled()) {
+                        log.debug("Layout found id='{}', file={}", layoutId, file);
+                    } else {
+                        log.info("Layout found id='{}'", layoutId);
+                    }
                 } else {
                     final Path relativeFileName = srcDir.resolve("layouts").relativize(Paths.get(file.toUri()));
                     final Path resolvedFile = dstDir.resolve(relativeFileName);
@@ -145,7 +150,7 @@ public class StaticRender {
                 String layoutId = metaYaml.get("layout");
 
                 if (!layouts.containsKey(layoutId)) {
-                    throw new RuntimeException(MessageFormat.format("No layout with id={0} found", layoutId));
+                    throw new RuntimeException(MessageFormat.format("No layout with id='{0}' found", layoutId));
                 }
 
                 final Path relativeFileName = srcDir.resolve("content").relativize(Paths.get(file.toUri()));
