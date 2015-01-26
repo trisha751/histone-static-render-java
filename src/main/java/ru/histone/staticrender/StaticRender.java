@@ -18,6 +18,8 @@ package ru.histone.staticrender;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 import ru.histone.Histone;
 import ru.histone.HistoneBuilder;
@@ -42,21 +44,27 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class StaticRender {
+    private static final Logger log = LoggerFactory.getLogger(StaticRender.class);
+    private static final String TEMPLATE_FILE_EXTENSION = "tpl";
+
     private static Histone histone;
     private static Yaml yaml;
     private static Map<String, ArrayNode> layouts = new HashMap();
     private static ObjectMapper jackson;
 
-    public static void main(String... args) {
-        Path workingDir = Paths.get(".");
-    }
+    public static void main(String... args) throws IOException {
+        Path workDir = Paths.get(".").toRealPath();
+        log.info("Working dir={}", workDir.toString());
 
-    public static void renderSite(String srcDir, String dstDir) throws IOException, HistoneException {
+        Path srcDir = workDir.resolve("src/site");
+        Path dstDir = workDir.resolve("build/site");
+
         StaticRender app = new StaticRender();
-        app.renderSite(Paths.get(srcDir), Paths.get(dstDir));
+        app.renderSite(srcDir, dstDir);
     }
 
     public StaticRender() {
+        log.info("Starting StaticRender");
         HistoneBuilder builder = new HistoneBuilder();
         try {
             histone = builder.build();
@@ -65,16 +73,18 @@ public class StaticRender {
         }
         yaml = new Yaml();
         jackson = new ObjectMapper();
+        log.info("StaticRender started");
     }
 
     public void renderSite(final Path srcDir, final Path dstDir) {
+        log.info("Running StaticRender for srcDir={}, dstDir={}", srcDir.toString(), dstDir.toString());
         Path contentDir = srcDir.resolve("content/");
         final Path layoutDir = srcDir.resolve("layouts/");
 
         FileVisitor<Path> layoutVisitor = new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                if (file.toString().endsWith(".histone")) {
+                if (file.toString().endsWith("." + TEMPLATE_FILE_EXTENSION)) {
                     ArrayNode ast = null;
                     try {
                         ast = histone.parseTemplateToAST(new FileReader(file.toFile()));
