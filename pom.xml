@@ -203,20 +203,6 @@
         <repository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		
-		<id>central</id>
- +		<snapshots>
- +			<enabled>false</enabled>
- +		</snapshots>
- +		<name>release</name>
- +		<url>http://weblab.megafon.ru/maven/release-weblab</url>
-		
-		<id>snapshots</id>
- +		<snapshots>
- +			<enabled>true</enabled>
- +		</snapshots>
- +		<name>snapshot</name>
- +		<url>http://weblab.megafon.ru/maven/snapshot-weblab</url>
  +	</repository>
 	    
 </distributionManagement>
