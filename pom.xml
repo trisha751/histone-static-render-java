@@ -183,6 +183,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>ru.histone</groupId>
+            <artifactId>histone-static-render</artifactId>
+            <version>VERSION</version>
+</dependency>
     </dependencies>
     <scm>
         <url>https://github.com/MegafonWebLab/histone-static-render-java</url>
@@ -200,4 +205,20 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+    <repository>
+	<id>central</id>
+	<snapshots>
+		<enabled>false</enabled>
+	</snapshots>
+	<name>release</name>
+	<url>http://weblab.megafon.ru/maven/release-weblab</url>
+</repository>
+<repository>
+	<id>snapshots</id>
+	<snapshots>
+		<enabled>true</enabled>
+	</snapshots>
+	<name>snapshot</name>
+	<url>http://weblab.megafon.ru/maven/snapshot-weblab</url>
+</repository>
 </project>
